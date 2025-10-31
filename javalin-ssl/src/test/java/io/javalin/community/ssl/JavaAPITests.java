@@ -12,8 +12,7 @@ public class JavaAPITests {
         String certString = null;
         String keyString = null;
         InputStream keystoreInputStream = null;
-        String keyPassword = null;
-
+        
         SslPlugin plugin = new SslPlugin(conf ->{
             // Connection options
             conf.host = null;                                                           // Host to bind to, by default it will bind to all interfaces
