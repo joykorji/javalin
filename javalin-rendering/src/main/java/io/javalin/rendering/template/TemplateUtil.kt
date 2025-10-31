@@ -9,9 +9,7 @@ package io.javalin.rendering.template
 object TemplateUtil {
     @JvmStatic
     fun model(vararg args: Any?): Map<String, Any?> {
-        if (args.size % 2 != 0) {
-            throw IllegalArgumentException("Number of arguments must be even (key value pairs).")
-        }
+        require(args.size % 2 == 0) { "Number of arguments must be even (key value pairs)." }
         return args.asSequence().chunked(2).associate { it[0] as String to it[1] }
     }
 }
