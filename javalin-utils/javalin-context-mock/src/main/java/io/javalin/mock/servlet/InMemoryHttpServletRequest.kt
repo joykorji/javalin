@@ -29,6 +29,8 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.function.Consumer
 
+private const val DEFAULT_IP = "127.0.0.1"
+
 // @formatter:off
 @Suppress("MemberVisibilityCanBePrivate")
 data class HttpServletRequestMock(
@@ -41,12 +43,12 @@ data class HttpServletRequestMock(
         @JvmField var scheme: String = "http",
         @JvmField var serverName: String = "localhost",
         @JvmField var serverPort: Int = 80,
-        @JvmField var remoteAddr: String = "127.0.0.1",
-        @JvmField var remoteHost: String = "127.0.0.1",
+        @JvmField var remoteAddr: String = DEFAULT_IP,
+        @JvmField var remoteHost: String = DEFAULT_IP,
         @JvmField var secure: Boolean = false,
         @JvmField var remotePort: Int = 80,
-        @JvmField var localName: String = "127.0.0.1",
-        @JvmField var localAddr: String = "127.0.0.1",
+        @JvmField var localName: String = DEFAULT_IP,
+        @JvmField var localAddr: String = DEFAULT_IP,
         @JvmField var localPort: Int = -1,
 
         @JvmField var realPath: String = "",
