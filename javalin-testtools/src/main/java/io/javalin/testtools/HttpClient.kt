@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets
 import java.util.function.Consumer
 import java.net.http.HttpClient as JdkHttpClient
 import java.net.http.HttpHeaders as JdkHttpHeaders
+private const val CONTENT_TYPE = "Content-Type"
 
 // Wrapper classes to maintain compatibility with OkHTTP API
 
@@ -91,7 +92,7 @@ class Request private constructor(
         fun post(formBody: FormBody): Builder {
             method = "POST"
             bodyPublisher = formBody.toBodyPublisher()
-            header("Content-Type", "application/x-www-form-urlencoded")
+            header("CONTENT_TYPE", "application/x-www-form-urlencoded")
             return this
         }
 
@@ -165,7 +166,7 @@ class HttpClient(val app: Javalin, private val client: JdkHttpClient) {
         request(path, combine(req, { builder ->
             builder.post(json.toRequestBodyPublisher())
             if (json != null) {
-                builder.header("Content-Type", ContentType.JSON)
+                builder.header("CONTENT_TYPE", ContentType.JSON)
             }
         }))
 
@@ -174,7 +175,7 @@ class HttpClient(val app: Javalin, private val client: JdkHttpClient) {
             request(path, combine(req, { builder ->
                 builder.put(json.toRequestBodyPublisher())
                 if (json != null) {
-                    builder.header("Content-Type", ContentType.JSON)
+                    builder.header("CONTENT_TYPE", ContentType.JSON)
                 }
             }))
 
@@ -183,7 +184,7 @@ class HttpClient(val app: Javalin, private val client: JdkHttpClient) {
             request(path, combine(req, { builder ->
                 builder.patch(json.toRequestBodyPublisher())
                 if (json != null) {
-                    builder.header("Content-Type", ContentType.JSON)
+                    builder.header("CONTENT_TYPE", ContentType.JSON)
                 }
             }))
 
@@ -192,7 +193,7 @@ class HttpClient(val app: Javalin, private val client: JdkHttpClient) {
             request(path, combine(req, { builder ->
                 builder.delete(json.toRequestBodyPublisher())
                 if (json != null) {
-                    builder.header("Content-Type", ContentType.JSON)
+                    builder.header("CONTENT_TYPE", ContentType.JSON)
                 }
             }))
 
