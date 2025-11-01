@@ -1,4 +1,5 @@
 package io.javalin.community.ssl
+private const val TLS_VERSION = "TLSv1.3"
 
 /**
  * Data class for the SSL configuration.
@@ -32,7 +33,7 @@ class TlsConfig(
                 "TLS_AES_128_GCM_SHA256",
                 "TLS_AES_256_GCM_SHA384",
                 "TLS_CHACHA20_POLY1305_SHA256"),
-            arrayOf("TLSv1.3")
+            arrayOf(TLS_VERSION)
         )
         @Deprecated("Use TlsConfig.MODERN instead", ReplaceWith("TlsConfig.MODERN"))
         fun getMODERN(): TlsConfig = MODERN
@@ -52,7 +53,8 @@ class TlsConfig(
                 "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
                 "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
                 "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
-            ), arrayOf("TLSv1.3","TLSv1.2")
+            ), 
+            arrayOf(TLS_VERSION, "TLSv1.2")
         )
         @Deprecated("Use TlsConfig.INTERMEDIATE instead", ReplaceWith("TlsConfig.INTERMEDIATE"))
         fun getINTERMEDIATE(): TlsConfig = INTERMEDIATE
@@ -89,7 +91,8 @@ class TlsConfig(
                 "TLS_RSA_WITH_AES_128_CBC_SHA",
                 "TLS_RSA_WITH_AES_256_CBC_SHA",
                 "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
-            ), arrayOf("TLSv1.3","TLSv1.2", "TLSv1.1", "TLSv1")
+            ), 
+            arrayOf(TLS_VERSION,"TLSv1.2", "TLSv1.1", "TLSv1")
         )
         @Deprecated("Use TlsConfig.OLD instead", ReplaceWith("TlsConfig.OLD"))
         fun getOLD(): TlsConfig = OLD
