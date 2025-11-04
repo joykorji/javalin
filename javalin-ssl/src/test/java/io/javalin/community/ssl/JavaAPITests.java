@@ -48,21 +48,6 @@ public class JavaAPITests {
             conf.withTrustConfig(trust -> trust.pemFromString("cert"));                 // Set the trust configuration, explained below. (by default all clients are trusted)
         });
 
-        SslPlugin trustPlugin = new SslPlugin(conf ->{
-            conf.withTrustConfig(trust ->{
-                // Certificate loading options (PEM/DER/P7B)
-                trust.certificateFromPath("path/to/certificate.pem");              // load a PEM/DER/P7B cert from the given path
-                trust.certificateFromClasspath("certificateName.pem");             // load a PEM/DER/P7B cert from the given path in the classpath
-                trust.certificateFromInputStream(certInputStream);                 // load a PEM/DER/P7B cert from the given input stream
-                trust.p7bCertificateFromString("p7b encoded certificate");         // load a P7B cert from the given string
-                trust.pemFromString("pem encoded certificate");                    // load a PEM cert from the given string
-
-                // Trust store loading options (JKS/PKCS12)
-                trust.trustStoreFromPath("path/to/truststore.jks", "password");    // load a trust store from the given path
-                trust.trustStoreFromClasspath("truststore.jks", "password");       // load a trust store from the given path in the classpath
-                trust.trustStoreFromInputStream(certInputStream, "password");      // load a trust store from the given input stream
-            });
-        });
 
         Javalin.create(conf -> conf.registerPlugin(plugin));
 
