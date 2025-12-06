@@ -166,7 +166,7 @@ class TestStaticFilesEdgeCases {
             override fun checkServerTrusted(a: Array<X509Certificate>, b: String) {}
             override fun getAcceptedIssuers() = arrayOf<X509Certificate>()
         })
-        val sslContext = SSLContext.getInstance("SSL")
+        val sslContext = SSLContext.getInstance("TLS")
             .also { it.init(null, trustAllCerts, SecureRandom()) }
         return OkHttpClient.Builder().apply {
             sslSocketFactory(sslContext.socketFactory, trustAllCerts[0])

@@ -116,7 +116,7 @@ abstract class IntegrationTestClass {
         @JvmStatic
         protected fun untrustedClientBuilder(): OkHttpClient.Builder {
             val sslContext: SSLContext = try {
-                SSLContext.getInstance("SSL")
+                SSLContext.getInstance("TLS")
             } catch (e: NoSuchAlgorithmException) {
                 throw RuntimeException(e)
             }
