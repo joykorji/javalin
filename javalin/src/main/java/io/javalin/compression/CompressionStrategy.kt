@@ -105,9 +105,7 @@ class CompressionStrategy(brotli: Brotli? = null, gzip: Gzip? = null, zstd: Zstd
      * If this fails, we keep Brotli disabled and warn the user.
      */
     private fun tryLoadBrotli(brotli: Brotli): Compressor? {
-        if (!brotli4jPresent()) {
-            throw IllegalStateException(DependencyUtil.missingDependencyMessage(CoreDependency.BROTLI4J))
-        }
+        check(brotli4jPresent()) { DependencyUtil.missingDependencyMessage(CoreDependency.BROTLI4J) }
         return when {
             Brotli4jLoader.isAvailable() -> return Brotli4jCompressor(brotli.level)
             else -> {
