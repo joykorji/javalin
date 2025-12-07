@@ -101,7 +101,11 @@ class JavalinJettyServlet(val cfg: JavalinConfig) : JettyWebSocketServlet() {
     private fun HttpServletResponse.setWsProtocolHeader(req: HttpServletRequest) {
         val wsProtocolHeader = req.getHeader(WebSocketConstants.SEC_WEBSOCKET_PROTOCOL) ?: return
         val firstProtocol = wsProtocolHeader.split(',').map { it.trim() }.find { it.isNotBlank() } ?: return
-        this.setHeader(WebSocketConstants.SEC_WEBSOCKET_PROTOCOL, firstProtocol)
+        // Sanitize protocol to prevent HTTP response splitting attacks
+        val sanitizedProtocol = firstProtocol.replace(Regex("[\r\n]"), "")
+        if (sanitizedProtocol.isNotBlank()) {
+            this.setHeader(WebSocketConstants.SEC_WEBSOCKET_PROTOCOL, sanitizedProtocol)
+        }
     }
 
     private fun calculateExecutionTimeMs(startTimeNanos: Long): Float =
